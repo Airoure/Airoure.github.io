@@ -1,0 +1,3 @@
+- name: Push git subdirectory as branch
+    uses: s0/git-publish-subdir-action@v2.6.0
+            
