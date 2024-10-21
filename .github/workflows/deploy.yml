@@ -14,7 +14,19 @@ jobs:
     # Any prerequisite steps
     - uses: actions/checkout@master
 
-    # Deploy to local repo
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.7
+    
+    - name: Install MkDocs
+      run:
+        pip install mkdocs mkdocs-material
+    
+    - name: Build MkDocs site
+      run:
+        mkdocs build
+
     - name: Deploy
       uses: s0/git-publish-subdir-action@develop
       env:
