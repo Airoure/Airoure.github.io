@@ -1,4 +1,4 @@
-name: Push git subdirectory as branch
+name: 发布到dist分支
 
 on:
   push:
