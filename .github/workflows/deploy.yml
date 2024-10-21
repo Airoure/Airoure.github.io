@@ -6,20 +6,19 @@ on:
       - master  # 设置触发工作流的源分支名称
 
 jobs:
-  publish-subdir:
+  deploy:
+    name: Deploy
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
 
-    - name: Push git subdirectory as branch
-      uses: s0/git-publish-subdir-action@v2.6.0
-      with:
-        # 要推送的子目录路径
-        dir: ./site
-        # 目标分支名称
-        branch: dist
-        # GitHub仓库的用户名和仓库名
-        repo: Airoure/Airoure.github.io
-        # GitHub个人访问令牌，用于身份验证
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+    # Any prerequisite steps
+    - uses: actions/checkout@master
+
+    # Deploy to local repo
+    - name: Deploy
+      uses: s0/git-publish-subdir-action@develop
+      env:
+        REPO: self
+        BRANCH: gh-pages
+        FOLDER: ./site
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
